@@ -1,0 +1,144 @@
+{% extends 'base.html' %}
+
+{% block content %}
+<div class="container">
+  <h2 class="mt-4 mb-4 text-center">Halaman Kelola Langganan</h2>
+
+  <div class="row">
+    <div class="col-md-12">
+      <div class="card mb-4">
+        <div class="card-header bg-primary text-white text-center font-weight-bold">
+          Informasi paket yang ingin dibeli
+        </div>
+        <div class="card-body">
+          <div class="table-responsive">
+            <table class="table table-bordered">
+              <thead>
+                <tr>
+                  <th scope="col" class="text-center">Nama</th>
+                  <th scope="col" class="text-center">Harga</th>
+                  <th scope="col" class="text-center">Resolusi Layar</th>
+                  <th scope="col" class="text-center">Dukungan Perangkat</th>
+                  <th scope="col" class="text-center">Tanggal Dimulai</th>
+                  <th scope="col" class="text-center">Tanggal Akhir</th>
+                </tr>
+              </thead>
+              {% if current_subscription %}
+              <tbody>
+                <tr>
+                  <td class="text-center">{{current_subscription.nama}}</td>
+                  <td class="text-center">Rp{{current_subscription.harga}}</td>
+                  <td class="text-center">{{current_subscription.resolusi_layar}}</td>
+                  <td class="text-center">{{current_subscription.dukungan_perangkat}}</td>
+                  <td class="text-center">{{current_subscription.start_date_time}}</td>
+                  <td class="text-center">{{current_subscription.end_date_time}}</td>
+                </tr>
+              </tbody>
+              {% else %}
+              <tbody>
+                <tr class="text-center">
+                  <td colspan="6">Tidak ada paket yang aktif</td>
+                </tr>
+              </tbody>
+              {% endif %}
+            </table>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="row">
+    <div class="col-md-12">
+      <div class="card mb-4">
+        <div class="card-header bg-primary text-white text-center font-weight-bold">
+          Pilih paket lain
+        </div>
+        <div class="card-body">
+          <div class="table-responsive">
+            <table class="table table-bordered">
+              <thead>
+                <tr>
+                  <th scope="col" class="text-center">Nama</th>
+                  <th scope="col" class="text-center">Harga</th>
+                  <th scope="col" class="text-center">Resolusi Layar</th>
+                  <th scope="col" class="text-center">Dukungan Perangkat</th>
+                  <th scope="col" class="text-center">Beli</th>
+                </tr>
+              </thead>
+              <tbody>
+                {% for subscription in other_subscriptions %}
+                <tr>
+                  <td class="text-center">{{subscription.nama}}</td>
+                  <td class="text-center">Rp{{subscription.harga}}</td>
+                  <td class="text-center">{{subscription.resolusi_layar}}</td>
+                  <td class="text-center">{{subscription.dukungan_perangkat}}</td>
+                  <td class="text-center">
+                    <a href="/langganan/beli?paket={{subscription.nama}}" class="btn btn-primary beli-button">Beli</a>
+                  </td>
+                </tr>
+                {% endfor %}
+              </tbody>
+            </table>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="row">
+    <div class="col-md-12">
+      <div class="card mb-4">
+        <div class="card-header bg-primary text-white text-center font-weight-bold">
+          Riwayat transaksi
+        </div>
+        <div class="card-body">
+          <div class="table-responsive">
+            <table class="table table-bordered">
+              <thead>
+                <tr>
+                  <th scope="col" class="text-center">Nama Paket</th>
+                  <th scope="col" class="text-center">Tanggal Dimulai</th>
+                  <th scope="col" class="text-center">Tanggal Akhir</th>
+                  <th scope="col" class="text-center">Metode Pembayaran</th>
+                  <th scope="col" class="text-center">Tanggal Pembayaran</th>
+                  <th scope="col" class="text-center">Total Pembayaran</th>
+                </tr>
+              </thead>
+              <tbody>
+                {% for subscription in history_of_subscriptions %}
+                <tr>
+                  <td class="text-center">{{subscription.nama_paket}}</td>
+                  <td class="text-center">{{subscription.start_date_time}}</td>
+                  <td class="text-center">{{subscription.end_date_time}}</td>
+                  <td class="text-center">{{subscription.metode_pembayaran}}</td>
+                  <td class="text-center">{{subscription.timestamp_pembayaran}}</td>
+                  <td class="text-center">Rp{{subscription.harga}}</td>
+                </tr>
+                {% endfor %}
+              </tbody>
+            </table>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- <script>
+  document.addEventListener("DOMContentLoaded", function () {
+    var beliButtons = document.querySelectorAll(".beli-button");
+
+    beliButtons.forEach(function (button) {
+      button.addEventListener("click", function () {
+
+        var currentPath = window.location.pathname;
+        var beliPath = currentPath + "beli/";
+
+        window.location.href = beliPath;
+      });
+    });
+  });
+</script> -->
+
+{% endblock content %}

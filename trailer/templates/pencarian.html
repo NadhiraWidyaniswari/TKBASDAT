@@ -1,0 +1,52 @@
+{% extends 'base2.html' %}
+
+{% block content %}
+
+<div class="container">
+  <h2 class="mt-4 mb-4 text-center">Hasil Pencarian</h2>
+
+  <div class="row mb-4 justify-content-center">
+    <div class="col-md-8">
+      <input type="text" id="searchInput" class="form-control" placeholder="Cari Tayangan Berdasarkan Judul">
+    </div>
+    <div class="col-md-4">
+      <div class="input-group">
+        <a href="{% url 'trailer:show_result' %}" class="btn btn-primary" id="searchButton">Cari</a>
+      </div>
+    </div>
+  </div>
+
+  <div class="row">
+    <div class="col-md-12">
+      <div class="card mb-4">
+        <div class="card-header bg-primary text-white text-center font-weight-bold">
+          Tayangan
+        </div>
+        <div class="card-body">
+          <div class="table-responsive">
+            <table class="table table-bordered">
+              <thead>
+                <tr>
+                    <th scope="col" style="text-align: center; vertical-align: middle;">Judul</th>
+                    <th scope="col" style="text-align: center; vertical-align: middle;">Sinopsis Trailer</th>
+                    <th scope="col" style="text-align: center; vertical-align: middle;">URL Trailer</th>
+                    <th scope="col" style="text-align: center; vertical-align: middle;">Tanggal Rilis Trailer</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr>
+                    <td class="text-center">Queen of Tears</td>
+                    <td class="text-center">Menceritakan tentang sepasang kekasih</td>
+                    <td class="text-center">queenoftearstrailer.com</td>
+                    <td class="text-center">4 Januari 2024</td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+
+{% endblock content %}

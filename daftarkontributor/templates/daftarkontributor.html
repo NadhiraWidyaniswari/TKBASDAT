@@ -1,0 +1,65 @@
+{% extends 'base.html' %}
+
+{% block content %}
+<div class="container">
+  <h2 class="mt-4 mb-4 text-center">Daftar Kontributor</h2>
+  <div class="row justify-content-center mb-4">
+    <div class="col-md-6">
+      <label for="tipe" class="mr-2">Filter sesuai tipe:</label>
+      <select id="tipe" class="form-control">
+        <option value="all" {% if tipe == "all" %}selected{% endif %}>Semua</option>
+        <option value="sutradara" {% if tipe == "sutradara" %}selected{% endif %}>Sutradara</option>
+        <option value="pemain" {% if tipe == "pemain" %}selected{% endif %}>Pemain</option>
+        <option value="penulis_skenario" {% if tipe == "penulis_skenario" %}selected{% endif %}>Penulis Skenario</option>
+      </select>
+    </div>
+  </div>
+  <div class="table-responsive">
+    <table class="table table-bordered">
+      <thead>
+        <tr>
+          <th scope="col" class="text-center">Nama</th>
+          <th scope="col" class="text-center">Tipe</th>
+          <th scope="col" class="text-center">Jenis Kelamin</th>
+          <th scope="col" class="text-center">Kewarganegaraan</th>
+        </tr>
+      </thead>
+      <tbody>
+        {% for individu in kontributor %}
+        <tr>
+          <td class="text-center">{{individu.nama}}</td>
+          <td class="text-center">{{individu.tipe}}</td>
+          <td class="text-center">{{individu.jenis_kelamin}}</td>
+          <td class="text-center">{{individu.kewarganegaraan}}</td>
+        </tr>
+        {% endfor %}
+      </tbody>
+    </table>
+  </div>
+</div>
+
+<script>
+  document.addEventListener("DOMContentLoaded", function() {
+    var selectTipe = document.getElementById("tipe");
+    var rows = document.querySelectorAll(".table tbody tr");
+
+    selectTipe.addEventListener("change", function() {
+      var selectedValue = selectTipe.value;
+
+      rows.forEach(function(row) {
+        var colTipe = row.querySelector("td:nth-child(2)").textContent.trim();
+        var colTipeArray = colTipe.split(',').map(function(item) {
+          return item.trim();
+        });
+
+        if (selectedValue === "all" || colTipeArray.includes(selectedValue)) {
+          row.style.display = "table-row";
+        } else {
+          row.style.display = "none";
+        }
+      });
+    });
+  });
+</script>
+
+{% endblock content %}

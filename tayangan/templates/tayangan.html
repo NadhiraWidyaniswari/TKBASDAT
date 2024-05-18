@@ -1,0 +1,180 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block content %}
+
+<div class="container">
+  <h2 class="mt-4 mb-4 text-center">Daftar {{jenis}}</h2>
+
+  <div class="row mb-4 justify-content-center">
+    <div class="col-md-8">
+      <input type="text" id="searchInput" class="form-control" placeholder="Cari {{jenis}} Berdasarkan Judul">
+    </div>
+    <div class="col-md-4">
+      <div class="input-group">
+        <button class="btn btn-primary" id="searchButton">Cari</button>
+      </div>
+    </div>
+  </div>
+
+  <div class="row">
+    <div class="col-md-12">
+      <div class="card mb-4">
+        <div class="card-header bg-primary text-white text-center font-weight-bold">
+          10 {{jenis}} Terbaik Minggu Ini
+        </div>
+        <div class="card-body">
+          <div class="row mb-4 justify-content-center">
+            <div class="col-md-4">
+              <select id="range" class="form-control">
+                <option value="Filter by" {% if range == "Global" %}selected{% endif %}>Filter by</option>
+                <option value="Global" {% if range == "Global" %}selected{% endif %}>Global</option>
+                <option value="Lokal" {% if range == "Lokal" %}selected{% endif %}>Lokal</option>
+              </select>
+            </div>
+          </div>
+          <div class="table-responsive">
+            <table class="table table-bordered">
+              <thead>
+                <tr>
+                  <th scope="col" style="text-align: center; vertical-align: middle;">Peringkat</th>
+                  <th scope="col" style="text-align: center; vertical-align: middle;">Judul</th>
+                  <th scope="col" style="text-align: center; vertical-align: middle;">Sinopsis Trailer</th>
+                  <th scope="col" style="text-align: center; vertical-align: middle;">URL Trailer</th>
+                  <th scope="col" style="text-align: center; vertical-align: middle;">Tanggal Rilis Trailer</th>
+                  <th scope="col" style="text-align: center; vertical-align: middle;">Total View 7 Hari Terakhir</th>
+                  {% if request.COOKIES.is_authenticated %}
+                  <th scope="col" style="text-align: center; vertical-align: middle;">Lihat</th>
+                  {% endif %}
+                </tr>
+              </thead>
+              <tbody>
+                {% for tayangan in tayangan_terbaik %}
+                <tr>
+                  <td class="text-center">{{tayangan.peringkat}}</td>
+                  <td class="text-center">{{tayangan.judul}}</td>
+                  <td class="text-center">{{tayangan.sinopsis}}</td>
+                  <td class="text-center">{{tayangan.url_video_trailer}}</td>
+                  <td class="text-center">{{tayangan.release_date_trailer}}</td>
+                  <td class="text-center">{{tayangan.total_view}}</td>
+                  {% if request.COOKIES.is_authenticated %}
+                  <td class="text-center">
+                    <a class="btn btn-primary text-white" href="/tayangan/detail-{{tayangan.jenis}}/{{tayangan.id}}">Detail</a>
+                  </td>
+                  {% endif %}
+                </tr>
+                {% endfor %}
+              </tbody>
+            </table>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="row">
+    <div class="col-md-12">
+      <div class="card mb-4">
+        <div class="card-header bg-primary text-white text-center font-weight-bold">
+          Film
+        </div>
+        <div class="card-body">
+          <div class="table-responsive">
+            <table class="table table-bordered">
+              <thead>
+                <tr>
+                  <th scope="col" style="text-align: center; vertical-align: middle;">Judul</th>
+                  <th scope="col" style="text-align: center; vertical-align: middle;">Sinopsis Trailer</th>
+                  <th scope="col" style="text-align: center; vertical-align: middle;">URL Trailer</th>
+                  <th scope="col" style="text-align: center; vertical-align: middle;">Tanggal Rilis Trailer</th>
+                  {% if request.COOKIES.is_authenticated %}
+                  <th scope="col" style="text-align: center; vertical-align: middle;">Lihat</th>
+                  {% endif %}
+                </tr>
+              </thead>
+              <tbody>
+                {% for film in films %}
+                <tr>
+                  <td class="text-center">{{film.judul}}</td>
+                  <td class="text-center">{{film.sinopsis}}</td>
+                  <td class="text-center">{{film.url_video_trailer}}</td>
+                  <td class="text-center">{{film.release_date_trailer}}</td>
+                  {% if request.COOKIES.is_authenticated %}
+                  <td class="text-center">
+                    <a href="/tayangan/detail-film/{{film.id}}" class="btn btn-primary">Detail</a>
+                  </td>
+                  {% endif %}
+                </tr>
+                {% endfor %}
+              </tbody>
+            </table>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="row">
+    <div class="col-md-12">
+      <div class="card mb-4">
+        <div class="card-header bg-primary text-white text-center font-weight-bold">
+          Series
+        </div>
+        <div class="card-body">
+          <div class="table-responsive">
+            <table class="table table-bordered">
+              <thead>
+                <tr>
+                  <th scope="col" style="text-align: center; vertical-align: middle;">Judul</th>
+                  <th scope="col" style="text-align: center; vertical-align: middle;">Sinopsis Trailer</th>
+                  <th scope="col" style="text-align: center; vertical-align: middle;">URL Trailer</th>
+                  <th scope="col" style="text-align: center; vertical-align: middle;">Tanggal Rilis Trailer</th>
+                  {% if request.COOKIES.is_authenticated %}
+                  <th scope="col" style="text-align: center; vertical-align: middle;">Lihat</th>
+                  {% endif %}
+                </tr>
+              </thead>
+              <tbody>
+                {% for seri in series %}
+                <tr>
+                  <td class="text-center">{{seri.judul}}</td>
+                  <td class="text-center">{{seri.sinopsis}}</td>
+                  <td class="text-center">{{seri.url_video_trailer}}</td>
+                  <td class="text-center">{{seri.release_date_trailer}}</td>
+                  {% if request.COOKIES.is_authenticated %}
+                  <td class="text-center">
+                    <a href="/tayangan/detail-series/{{seri.id}}" class="btn btn-primary text-white">Detail</a>
+                  </td>
+                  {% endif %}
+                </tr>
+                {% endfor %}
+              </tbody>
+            </table>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+
+  {% endblock content %}
+
+  {% block script %}
+  <script>
+  const searchInput = document.getElementById('searchInput');
+  const searchButton = document.getElementById('searchButton');
+  
+  searchButton.addEventListener('click', (e) => {
+    e.preventDefault();
+    const searchValue = searchInput.value;
+    window.location.href = `/tayangan/pencarian?q=${searchValue}`;
+  });
+  
+  const selectRange = document.getElementById('range');
+  selectRange.addEventListener('change', function () {
+    const selectedRange = selectRange.value;
+    window.location.href = `?range=${selectedRange}`;
+  });
+  
+  </script>
+  {% endblock script %}

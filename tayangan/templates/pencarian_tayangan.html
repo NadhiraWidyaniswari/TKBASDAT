@@ -1,0 +1,76 @@
+{% extends 'base.html' %}
+
+{% block content %}
+
+<div class="container">
+  <h2 class="mt-4 mb-4 text-center">Hasil Pencarian</h2>
+
+  <div class="row mb-4 justify-content-center">
+    <div class="col-md-8">
+      <input type="text" id="searchInput" class="form-control" placeholder="Cari Tayangan Berdasarkan Judul">
+    </div>
+    <div class="col-md-4">
+      <div class="input-group">
+        <button class="btn btn-primary" id="searchButton">Cari</button>
+      </div>
+    </div>
+  </div>
+
+  <div class="row">
+    <div class="col-md-12">
+      <div class="card mb-4">
+        <div class="card-header bg-primary text-white text-center font-weight-bold">
+          Tayangan
+        </div>
+        <div class="card-body">
+          <div class="table-responsive">
+            <table class="table table-bordered">
+              <thead>
+                <tr>
+                    <th scope="col" style="text-align: center; vertical-align: middle;">Judul</th>
+                    <th scope="col" style="text-align: center; vertical-align: middle;">Sinopsis Trailer</th>
+                    <th scope="col" style="text-align: center; vertical-align: middle;">URL Trailer</th>
+                    <th scope="col" style="text-align: center; vertical-align: middle;">Tanggal Rilis Trailer</th>
+                    {% if request.COOKIES.is_authenticated %}
+                    <th scope="col" style="text-align: center; vertical-align: middle;">Lihat</th>
+                    {% endif %}
+                </tr>
+              </thead>
+              <tbody>
+                {% for t in tayangan %}
+                <tr>
+                    <td class="text-center">{{t.judul}}</td>
+                    <td class="text-center">{{t.sinopsis}}</td>
+                    <td class="text-center">{{t.url_video_trailer}}</td>
+                    <td class="text-center">{{t.release_date_trailer}}</td>
+                    {% if request.COOKIES.is_authenticated %}
+                    <td class="text-center">
+                      <a class="btn btn-primary text-white" href="/tayangan/detail-{{t.jenis}}/{{t.id}}">Detail</a>
+                    </td>
+                    {% endif %}
+                </tr>
+                {% endfor %}
+              </tbody>
+            </table>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+
+{% endblock content %}
+
+{% block script %}
+  <script>
+    const searchInput = document.getElementById('searchInput');
+    const searchButton = document.getElementById('searchButton');
+
+    searchButton.addEventListener('click', (e) => {
+      e.preventDefault();
+      const searchValue = searchInput.value;
+      window.location.href = `/tayangan/pencarian?q=${searchValue}`;
+    });
+  </script>
+
+  {% endblock script %}

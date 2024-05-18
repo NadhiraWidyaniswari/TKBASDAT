@@ -1,0 +1,151 @@
+{% extends 'base2.html' %}
+
+{% block content %}
+
+<div class="container">
+  <h2 class="mt-4 mb-4 text-center">Daftar Tayangan</h2>
+
+  <div class="row mb-4 justify-content-center">
+    <div class="col-md-8">
+      <input type="text" id="searchInput" class="form-control" placeholder="Cari Tayangan Berdasarkan Judul">
+    </div>
+    <div class="col-md-4">
+      <div class="input-group">
+        <a href="{% url 'trailer:show_result' %}" class="btn btn-primary" id="searchButton">Cari</a>
+      </div>
+    </div>
+  </div>
+
+  <div class="row">
+    <div class="col-md-12">
+      <div class="card mb-4">
+        <div class="card-header bg-primary text-white text-center font-weight-bold">
+          10 Tayangan Terbaik Minggu Ini
+        </div>
+        <div class="card-body">
+            <div class="row mb-4 justify-content-center">
+                <div class="col-md-4">
+                    <!-- Dropdown untuk pilihan tipe tayangan -->
+                    <select id="tipe" class="form-control">
+                        <option value="Global">Global</option>
+                        <option value="Local">Lokal</option>
+                    </select>
+                </div>
+            </div>
+          <div class="table-responsive">
+            <table class="table table-bordered">
+              <thead>
+                <tr>
+                    <th scope="col" style="text-align: center; vertical-align: middle;">Peringkat</th>
+                    <th scope="col" style="text-align: center; vertical-align: middle;">Judul</th>
+                    <th scope="col" style="text-align: center; vertical-align: middle;">Sinopsis Trailer</th>
+                    <th scope="col" style="text-align: center; vertical-align: middle;">URL Trailer</th>
+                    <th scope="col" style="text-align: center; vertical-align: middle;">Tanggal Rilis Trailer</th>
+                    <th scope="col" style="text-align: center; vertical-align: middle;">Total View 7 Hari Terakhir</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr>
+                    <td class="text-center">1</td>
+                    <td class="text-center">Queen of Tears</td>
+                    <td class="text-center">Menceritakan tentang sepasang kekasih</td>
+                    <td class="text-center">queenoftearstrailer.com</td>
+                    <td class="text-center">4 Januari 2024</td>
+                    <td class="text-center">100044</td>
+                </tr>
+                <tr>
+                    <td class="text-center">2</td>
+                    <td class="text-center">Crash Landing On You</td>
+                    <td class="text-center">Bercerita seorang yang menyukai piano</td>
+                    <td class="text-center">crashlandingonyoutrailer.com</td>
+                    <td class="text-center">2 Agustus 2019</td>
+                    <td class="text-center">32434</td>
+                </tr>
+                <tr>
+                    <td class="text-center">3</td>
+                    <td class="text-center">Minion 4</td>
+                    <td class="text-center">Gru yang sedang kelalahan</td>
+                    <td class="text-center">minion4trailer.com</td>
+                    <td class="text-center">8 Maret 2024</td>
+                    <td class="text-center">1231</td>
+                  </tr>
+              </tbody>
+            </table>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="row">
+    <div class="col-md-12">
+      <div class="card mb-4">
+        <div class="card-header bg-primary text-white text-center font-weight-bold">
+          Film
+        </div>
+        <div class="card-body">
+          <div class="table-responsive">
+            <table class="table table-bordered">
+              <thead>
+                <tr>
+                    <th scope="col" style="text-align: center; vertical-align: middle;">Judul</th>
+                    <th scope="col" style="text-align: center; vertical-align: middle;">Sinopsis Trailer</th>
+                    <th scope="col" style="text-align: center; vertical-align: middle;">URL Trailer</th>
+                    <th scope="col" style="text-align: center; vertical-align: middle;">Tanggal Rilis Trailer</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr>
+                    <td class="text-center">Minion 4</td>
+                    <td class="text-center">Gru yang sedang kelalahan</td>
+                    <td class="text-center">minion4trailer.com</td>
+                    <td class="text-center">8 Maret 2024</td>
+                  </tr>
+              </tbody>
+            </table>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="row">
+    <div class="col-md-12">
+      <div class="card mb-4">
+        <div class="card-header bg-primary text-white text-center font-weight-bold">
+          Series
+        </div>
+        <div class="card-body">
+          <div class="table-responsive">
+            <table class="table table-bordered">
+              <thead>
+                <tr>
+                    <th scope="col" style="text-align: center; vertical-align: middle;">Judul</th>
+                    <th scope="col" style="text-align: center; vertical-align: middle;">Sinopsis Trailer</th>
+                    <th scope="col" style="text-align: center; vertical-align: middle;">URL Trailer</th>
+                    <th scope="col" style="text-align: center; vertical-align: middle;">Tanggal Rilis Trailer</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr>
+                    <td class="text-center">Queen of Tears</td>
+                    <td class="text-center">Menceritakan tentang sepasang kekasih</td>
+                    <td class="text-center">queenoftearstrailer.com</td>
+                    <td class="text-center">4 Januari 2024</td>
+                </tr>
+                <tr>
+                    <td class="text-center">Crash Landing On You</td>
+                    <td class="text-center">Bercerita seorang yang menyukai piano</td>
+                    <td class="text-center">crashlandingonyoutrailer.com</td>
+                    <td class="text-center">2 Agustus 2019</td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+
+{% endblock content %}

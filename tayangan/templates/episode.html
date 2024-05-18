@@ -1,0 +1,71 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block content %}
+
+<div class="container">
+  <h2 class="mt-4 mb-4 text-center"> Halaman Episode</h2>
+
+  <div class="row">
+    <div class="col-md-12">
+      <div class="card mb-4">
+        <div class="card-header bg-primary text-white text-center font-weight-bold">
+          {{episode.judul}}
+        </div>
+      </div>
+
+      <div class="mt-3">
+        <h5 class="card-title">Episode Lainnya:</h5>
+        <ul class="list-group">
+          {% for e in episode.other_episodes %}
+          <li class="list-group-item">
+            <a href="/tayangan/detail-episode/{{e.id_series}}/{{e.sub_judul}}"
+              class="btn btn-primary">{{e.sub_judul}}</a>
+          </li>
+          {% endfor %}
+        </ul>
+      </div>
+
+      <div class="mt-3 d-flex flex-column align-items-center">
+        <input class="w-50" type="range" name="progress" id="progress-input" min="0" max="100" value="0">
+        <input type="hidden" name="id_tayangan" id="id_tayangan" value="{{episode.id_series}}">
+        <p>Progress: <span id="progress-value">0</span>%</p>
+      </div>
+
+      <div class="btn-group" role="group" aria-label="Tombol Aksi">
+        <button type="button" class="btn btn-primary" id="tonton-button">Tonton</button>
+      </div>
+      <div class="card-body">
+        <div class="table-responsive">
+          <table class="table table-bordered">
+            <tbody>
+              <tr>
+                <th scope="row">Sinopsis Episode</th>
+                <td class="text-center">{{episode.sinopsis}}</td>
+              </tr>
+              <tr>
+                <th scope="row">Durasi Episode</th>
+                <td class="text-center">{{episode.durasi}} menit</td>
+              </tr>
+              <tr>
+                <th scope="row">URL Episode</th>
+                <td class="text-center">{{episode.url_video}}</td>
+              </tr>
+              <tr>
+                <th scope="row">Tanggal Rilis Episode</th>
+                <td class="text-center">{{episode.release_date}}</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+
+{% endblock content %}
+
+{% block script %}
+<script src="{% static 'js/tonton_tayangan.js' %}" type='module'></script>
+{% endblock %}

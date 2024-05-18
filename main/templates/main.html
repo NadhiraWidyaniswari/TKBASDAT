@@ -1,0 +1,75 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block meta %}
+    <title>PacilFlix</title>
+{% endblock meta %}
+
+{% block content %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>PacilFlix</title>
+    <style>
+        body, html {
+            height: 100%;
+            margin: 0;
+            font-family: Arial, sans-serif;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            background-color: #333;
+            color: #fff;
+        }
+        .container {
+            text-align: center;
+        }
+        h1 {
+            font-size: 3em;
+            margin-bottom: 20px;
+        }
+        .buttons {
+            margin-top: 20px;
+            display: flex;
+            flex-direction: column; 
+            align-items: center; 
+        }
+        button {
+            padding: 15px 30px;
+            font-size: 1em;
+            color: white;
+            border: none;
+            border-radius: 5px;
+            margin: 5px;
+            cursor: pointer;
+            transition: background-color 0.3s;
+            width: 200px; 
+        }
+        .login-btn {
+            background-color: #007bff;
+        }
+        .register-btn {
+            background-color: #28a745;
+        }
+        button:hover {
+            opacity: 0.8;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>PacilFlix - B16</h1>
+        <div class="buttons">
+            <a href = "authentication/login">
+                <button class="login-btn">Login</button>
+            </a>
+            <a href = "authentication/register">
+                <button class="register-btn">Register</button>
+            </a>
+        </div>
+    </div>
+</body>
+</html>
+{% endblock content %}
